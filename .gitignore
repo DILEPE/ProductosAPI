@@ -1,0 +1,9 @@
+# Ignorar archivos y carpetas generados por Visual Studio
+.vs/
+.idea/
+bin/
+obj/
+*.user
+*.userosscache
+*.suo
+*.sln.docstates
