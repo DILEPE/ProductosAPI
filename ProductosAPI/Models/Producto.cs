@@ -1,33 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ProductosAPI.Models
 {
     public class Producto
     {
-        // Id del producto
         public int Id { get; set; }
 
-        
-        [Required(ErrorMessage = "El nombre del producto es obligatorio.")]
-        [StringLength(100, ErrorMessage = "El nombre del producto no puede tener más de 100 caracteres.")]
+        [Required]
+        [StringLength(100, ErrorMessage = "El nombre no puede ser mayor a 100 caracteres.")]
         public string Nombre { get; set; }
 
-        // Descripción del producto (obligatorio)
-        [Required(ErrorMessage = "La descripción del producto es obligatoria.")]
+        [StringLength(500, ErrorMessage = "La descripción no puede ser mayor a 500 caracteres.")]
         public string Descripcion { get; set; }
 
-        // Precio del producto (obligatorio, mayor que 0)
-        [Required(ErrorMessage = "El precio es obligatorio.")]
-        [Range(0.01, double.MaxValue, ErrorMessage = "El precio debe ser mayor a 0.")]
+        [Required]
+        [Range(0, double.MaxValue, ErrorMessage = "El precio debe ser un valor positivo.")]
         public decimal Precio { get; set; }
 
-        // Fecha de creación del producto (obligatoria)
-        [Required(ErrorMessage = "La fecha de creación es obligatoria.")]
         public DateTime FechaCreacion { get; set; }
 
-        
-        [Required(ErrorMessage = "El estado del producto es obligatorio.")]
         public bool Estado { get; set; }
+
+        // Relación uno a muchos: un producto puede tener muchas imágenes
+        public ICollection<ImagenProducto> Imagenes { get; set; }
     }
 }
